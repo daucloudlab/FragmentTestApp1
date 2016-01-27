@@ -13,6 +13,9 @@ import kaznitu.kz.testfragment.R;
 
 
 public class Fragment2 extends Fragment {
+    public static final String BUTTON_INDEX = "button_index" ;
+    public static final int BUTTON_INDEX_DEFAULT = -1 ;
+
     private TextView mInfoTextView;
     private ImageView mCatImageView;
     private String[] mCatDescriptionArray;
@@ -25,6 +28,12 @@ public class Fragment2 extends Fragment {
         mCatImageView = (ImageView) rootView.findViewById(R.id.imageView1);
 
         mCatDescriptionArray = getResources().getStringArray(R.array.cats) ;
+
+        Bundle args = getArguments() ;
+        int buttonIndex = args != null ? args.getInt(BUTTON_INDEX, BUTTON_INDEX_DEFAULT)
+                : BUTTON_INDEX_DEFAULT ;
+        if(buttonIndex != BUTTON_INDEX_DEFAULT)
+            setDescription(buttonIndex);
 
         return rootView ;
     }

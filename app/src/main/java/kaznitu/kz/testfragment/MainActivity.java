@@ -19,9 +19,18 @@ public class MainActivity extends AppCompatActivity implements Fragment1.OnSelec
         Fragment2 fragment2 = (Fragment2)fm.findFragmentById(R.id.fragment2) ;
 
         if(fragment2 == null || !fragment2.isVisible()){
-            Intent intent = new Intent(getApplicationContext(), SecondActivity.class) ;
-            intent.putExtra("buttonIndex", buttonIndex) ;
-            startActivity(intent);
+//            Intent intent = new Intent(getApplicationContext(), SecondActivity.class) ;
+//            intent.putExtra("buttonIndex", buttonIndex) ;
+//            startActivity(intent);
+            fragment2 = new Fragment2() ;
+            Bundle args = new Bundle() ;
+            args.putInt(Fragment2.BUTTON_INDEX, buttonIndex);
+            fragment2.setArguments(args);
+
+            FragmentTransaction ft = fm.beginTransaction() ;
+            ft.replace(R.id.container, fragment2, "fragment2");
+            ft.addToBackStack(null) ;
+            ft.commit() ;
         }else {
             fragment2.setDescription(buttonIndex);
         }
